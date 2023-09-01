@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <form method="get"
+              action="http://localhost:8888/back/form">
+            <label>TEXT : <input type="text" 
+                                required
+                                placeholder="아이디를입력하세요" 
+                                maxlength="5" 
+                                name="t"></label>
+            <label for="p">PASSWORD : 
+            </label>
+            <input type="password" 
+                    id="p" 
+                    placeholder="비밀번호를입력하세요" 
+                    name="p">
+
+            <label> NUMBER :<input type="number" value="1" max="10" min="0"></label>
+            <label> TEL :<input type="tel"></label>
+            <label> EMAIL :<input type="email" value="a@b.com"></label>
+            <label> DATE : <input type="date"></label>
+            <label> SEARCH : <input type="search"></label>
+
+            <fieldset>
+                <legend>다중선택</legend>
+                <input type="checkbox" checked name="c" value="1">ONE&nbsp;&nbsp;&nbsp; <!--기본 one체크-->
+                <input type="checkbox"         name="c" value="2">TWO
+            </fieldset>
+
+            <fieldset>
+                <legend>단일선택</legend>
+                <input type="radio" name="r">ONE&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="r">TWO
+            </fieldset>
+
+            <select name="s">
+                <option>ONE</option>
+                <option selected>TWO</option> <!--기본체크-->
+            </select>
+            <textarea rows="3" cols="100" name="ta" readonly>여러줄입력란입니다</textarea>
+            <input type="hidden" name="h" value="hValue">
+            파일첨부 : <input type = "file" name="f" multiple> <!--요청방식이 post여야 한다-->
+            <input type="button" value="일반버튼">
+            <input type="submit" value="전송버튼">
+            <input type="reset" value="리셋버튼">
+
+            <button type="button">일반버튼</button>
+            <!--form태그 내부의 button의 default타입은 submit이다
+                form태그 외부의 button의 default타입은 button이다
+            -->
+            <button type="submit">전송버튼</button>
+            <button              >전송버튼2</button>
+            <button type="reset">리셋버튼</button>
+        </form>
+        </form>
+    </body>
+</html>

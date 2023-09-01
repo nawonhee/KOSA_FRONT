@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div.product{
+                box-sizing : border-box;
+                width:200px;
+                display:inline-block;
+            }
+            div.product>ul{
+                list-style-type: none; /*ul요소때문에 동그라미 점 생기는 거라 없애주는*/
+                padding-left:0px;
+            }
+            div.product>ul>li>img{
+                /*width:100px;*/
+                width:80%;
+            }
+            div.product>ul>li>span{
+                display:inline-block;
+                width:80%;
+                text-align: center;
+            }
+            .productlist>h3{
+                width:200px;
+                margin:10px auto;
+                text-align: right;
+                background: yellow;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="productlist">
+            <h3>상품목록</h3>
+            <div class="product">
+                <ul>
+                    <li><img src="../images/C0001.png" alt="아메리카노"></li>
+                    <li><span>아메리카노</span></li>
+                </ul>
+            </div>
+            <div class="product">
+                <ul>
+                    <li><img src="../images/C0002.png" alt="아이스아메리카노"></li>
+                    <li><span>아이스아메리카노</span></li>
+                </ul>
+            </div>
+            <div class="product">
+                <ul>
+                    <li><img src="../images/C0005.png" alt="카푸치노"></li>
+                    <li><span>카푸치노</span></li>
+                </ul>
+            </div>
+            <div class="product">
+                <ul>
+                    <li><img src="../images/F0001.png"></li>
+                    <li><span>바나나</span></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
