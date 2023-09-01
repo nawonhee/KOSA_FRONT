@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div{
+                padding:10px;
+            }
+        </style>
+    </head>
+    <body>
+        <form style="border:1px solid" method="post"
+             action="http://localhost:8888/back/login">
+            <div>
+                <label>아이디 : <input type="text"
+                                        required
+                                        placeholder="아이디를 입력하세요" 
+                                        id="i"
+                                        name="id"></label>
+            </div>
+            <div">
+                <label>비밀번호 : <input type="text" 
+                                        required
+                                        placeholder="비밀번호를 입력하세요" 
+                                        id="p"
+                                        name="pwd"></label>
+            </div>
+            <div>
+                <input type="checkbox" checked id="c">
+                <label for="c">아이디저장</label>
+                <input type="submit" value="로그인" style="margin-left:40px">
+            </div>
+        </form>
+    </body>
+</html>
