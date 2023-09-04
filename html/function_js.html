@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            //이름있는 함수
+            function fa(param1, param2){
+                return param1+param2
+            }
+
+            var result = fa(5,7)
+            console.log(result) //13
+
+            console.log(fa(5)) //NaN
+            console.log(fa(5,3,1)) //8
+
+            function fb(){ //반환값이 없는 함수
+                
+            }
+            result = fb()
+            console.log(result) //undefined
+            //이름없는 함수
+            var f1 = function(param1,param2){
+                return param1+param2
+            }
+            console.log(f1(5,7)) //12
+
+            var f2 = function(param1,param2,param3){
+                window.setTimeout(function(){
+                    console.log(param1(param2,param3))
+                } , 5*1000)
+            }
+            f2(f1, 5, 7);
+            //f2(f1(),5,7)
+            f2(function (param1, param2){
+                return param1+param2
+            }, 5, 7)
+        </script>
+    </head>
+</html>

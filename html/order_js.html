@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            alert("in head")
+        </script>
+        <script>
+            window.addEventListner( //윈도우객체에서
+                'load', //로드가 발생하면
+                function(){ //이걸 실행해라
+                    alert("in head last")
+                }
+            )
+        </script>
+    </head>
+    <body>
+        <script>
+            alert("in body 1")
+        </script>
+        <h1>자바스크립트 처리순서</h1>
+        <script>
+            alert("in body 2")
+        </script>
+    </body>
+</html>

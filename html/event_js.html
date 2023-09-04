@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div.select>select.category2{
+                display:none;
+            }
+        </style>
+        <script>
+            //1.
+            window.addEventListener('load' , function(){
+               //document.getElementById()
+                //querySelector : 굳이 아이디속성 아니더라도 선택자를 이용해서 객체를 쉽게 찾아낼 수 있다
+                const inputObj = document.querySelector('input[type=text]')
+                //console.log(inputObj.value)
+
+                const buttons = document.querySelectorAll('div.click>button')
+                //console.log(buttons) //NodeList(13)
+                // for(let i=0;i<buttons.length;i++){
+                //     const btObj = buttons[i]
+                //     //console.log(bt.innerHTML)
+
+                //     //--button객체에서 클릭이벤트가 발생했을 때 할 일 start --
+                //     //dom트리의 button객체에서 클릭이벤트가 발생했을 때 할 일을 등록한다
+                //     btObj.addEventListener('click',function(){
+                //         alert(btObj.innerHTML)
+                //     })
+                //     //---button객체에서 클릭이벤트가 발생했을 때 할 일 end--
+                // }
+                //buttons.forEach(btObj, index)
+
+                // buttons.forEach(function(btObj,i){
+                // //button객체에서 클릭이벤트가 발생했을 때 할 일 start --
+                //     btObj.addEventListener('click',function(){
+                //         //alert(btObj.innerHTML)
+                //         alert(this.innerHTML)
+                //     })
+                // //button 객체에서 클릭이벤트가 발생했을 때 할 일 end --
+                // })
+
+                //ALL checkbox객체를 DOM트리에서 찾기
+                //const chkboxAll = document.querySelector('div.checkbox>input[type=checkbox]')
+                
+                const chkboxArr = document.querySelectorAll('div.checkbox>input[type=checkbox]')
+                const chkboxAll = chkboxArr[0]
+                // chkboxAll.checked = true
+                // console.log('ALL 체크박스 선택여부:', chkboxAll.checked)
+
+                //---ALL checkbox객체에서 클릭이벤트가 발생했을 때 할 일 start--
+                chkboxAll.addEventListener('click', function(){
+                    for(let i=1;i<4;i++){
+                        chkboxArr[i].checked = chkboxAll.checked
+                    }
+                })
+                //---ALL checkbox객체에서 클릭이벤트가 발생했을 때 할 일 end--
+
+                //DOM트리에서 select객체 찾기
+                //--select객체에서 클릭이벤트가 발생했을 때 할 일 START--
+                const selectObj=document.querySelector("div.select>select")
+                selectObj.addEventListener('click',function(){
+                    console.log(selectObj.value)
+                })
+                //--select객체에서 클릭이벤트가 발생했을 때 할 일 end--
+
+                //DOM트리에서 class속성값이 category2인 select객체찾기
+                const selectObj2 = document.querySelector("div.select>select.category2")
+                //--select객체에서 체인지이벤트가 발생했을 때 할 일 START--
+                selectObj.addEventListener('change', function(){
+                    console.log('change', selectObj.value)
+                    switch(selectObj.value){
+                        case 'sedan': 
+                            selectObj2.innerHTML = '<option>뉴아반테</option>'
+                            selectObj2.innerHTML += '<option>그랜져</option>'
+                            selectObj2.style.display = 'inline-block'
+                            break
+                        case 'suv' :
+                        selectObj2.innerHTML = '<option>산타페</option>'
+                            selectObj2.innerHTML += '<option>투산</option>'
+                            selectObj2.innerHTML += '<option>펠리세이드</option>'
+                            selectObj2.style.display = 'inline-block'
+                            break
+                        case 'truck' :
+                            selectObj2.innerHTML = '<option>마이티</option>'
+                            selectObj2.style.display = 'inline-block'
+                            break
+                        default:
+                            selectObj2.innerHTML = ''
+                            selectObj2.style.display = 'none'
+                            break
+                    }
+                })
+                //--select객체에서 체인지이벤트가 발생했을 때 할 일 end--
+
+                //DOM트리에서 name속성값이 id인 input객체찾기
+                const inputIdObj = document.querySelector('div.input>input[name=id]');
+                //----name속성값이 id인 input객체에서 keyup이벤트가 발생했을 때 할 일 start--
+                inputIdObj.addEventListener("keyup",function(e){
+                    //console.log(this.value)
+                    console.log(e.target.value) //이벤트가 전달된 객체를 리턴한다
+                })
+                //----name속성값이 id인 input객체에서 keyup이벤트가 발생했을 때 할 일 end--
+
+                //DOM트리에서 form객체찾기
+                const formObj = document.querySelector('form')
+                const btObj1=document.querySelector('form>button')
+                //----btObj1객체에서 click이벤트가 발생했을 때 할 일 start--
+                formObj.addEventListener('click', function(){
+                    alert("formObj submit event발생됨")
+                })
+                //----btObj1객체에서 click이벤트가 발생했을 때 할 일 end--
+
+                const passwordArr=document.querySelectorAll('form>input[type=password]')
+                
+                //----formObj객체에서 submit이벤트가 발생했을 때 할 일 start--
+                formObj.addEventListener('submit', function(e){
+                    alert("formObj submit event발생됨")
+                    //비밀번호 값이 서로 일치하면
+                    //'비밀번호가 일치합니다'를 경고창에 보여주고
+                    //일치하지 않으면 '비밀번호가 일치하지 않습니다'를 경고창에 보여준다
+                    //전송중지
+                    if(passwordArr[0].value==passwordArr[1].value){
+                        alert("비밀번호가 일치합니다")
+                    }else{
+                        alert("비밀번호가 일치하지 않습니다")
+                        e.preventDefault() //기본 이벤트 처리를 안 하겠다
+                    }
+                })
+                //----formObj객체에서 submit이벤트가 발생했을 때 할 일 end--
+            })
+            //2.
+            // window.onload = function(){
+
+            // }
+            //1번 2번 다 똑같음
+            // function f1(){}
+        </script>
+    </head>
+    <!--3-->
+    <!--<body onload="f1">-->
+    <body>
+        <div class="click">
+            <input type="text" readonly value="0"><br>
+            <button>7</button><button>8</button><button>9</button><br>
+            <button>4</button><button>5</button><button>6</button><br>
+            <button>1</button><button>2</button><button>3</button><br>
+            <button>0</button><br>
+            <button>+</button><button>-</button><button>=</button>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox">ALL<br>
+            <input type="checkbox">ONE&nbsp;&nbsp;&nbsp;
+            <input type="checkbox">TWO&nbsp;&nbsp;&nbsp;
+            <input type="checkbox">THREE
+        </div>
+        <div class="select">
+            <select class="category1">
+                <option value="">분류를 선택하세요</option>
+                <option value="sedan">승용차</option>
+                <option value="suv">SUV</option>
+                <option value="truck">트럭</option>
+            </select>
+
+            <select class="category2">
+                <option>그랜져</option>
+                <option>아반테</option>
+            </select>
+        </div>
+
+        <div class="input">
+            <input type="text" name="id" placeholder="아이디를 입력하세요">
+            <input type="text" name="name" placeholder="이름을 입력하세요">
+        </div>
+
+        <form method="post" action="http://localhost:8888/back/form">
+            <input type="text" name="t">
+            <input type="password" name="p" placeholder="비밀번호를 입력하세요">
+            <input type="password" placeholder="비밀번호를 다시 한번 입력하세요">
+            <button>전송</button> <!--form태그의 하위태그로 button을 만들면 type="submit"이 자동설정된다-->
+        </form>
+    </body>
+</html>

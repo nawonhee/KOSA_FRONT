@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script>
+            var year=2023
+            //if
+            if(year%2==0) console.log('짝수해')
+            else console.log('홀수해')
+            //switch
+            switch(year%2) {
+                case 0:
+                    console.log('짝수해')
+                    break;
+                default:
+                    console.log('홀수해')
+                    break;
+            }
+
+            var score=67
+            if(score>=60) {
+                console.log('합격')
+                if(score>=90) console.log('A')
+                else if(score>=80) console.log('B')
+                else if(score>=70) console.log('C')
+                else console.log('D')
+            } else console.log('불합격')
+
+        </script>
+    </head>
+</html>

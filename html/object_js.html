@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            let product={
+                prodNo:'C0001',
+                prodName: '아메리카노',
+                prodPrice : 1000,
+                toString: function(){
+                    return this.prodNo+":"+this.prodName+":"+this.  prodPrice
+                }
+            }
+            product.prodPrice += 500
+            console.log(product.toString())
+        </script>
+    </head>
+</html>
