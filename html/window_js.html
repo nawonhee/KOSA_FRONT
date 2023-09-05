@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.addEventListener('load', ()=>{
+                //DOM트리에서 class속성값이 open인 객체찾기
+                const btOpen = document.querySelector('.open')
+                //----open객체에서 click이벤트가 발생했을 때 할 일 start---
+                btOpen.addEventListener('click', ()=>{
+                    let url = './window_popup_js.html'
+                    let target = 'w1'
+                    let feat = 'width=300 height=300'
+                    window.open(url, target, feat)
+                })
+                //----open객체에서 click이벤트가 발생했을 때 할 일 end---
+
+                //----class속성값이 timeout인 button객체에서 click이벤트가 발생했을 때 할 일 start---
+                document.querySelector('button.timeout').addEventListener('click',()=>{
+                    window.setTimeout(()=>{
+                        const resultObj = document.querySelector('div.result')
+                        let now = new Date()
+                        let y = now.getFullYear()
+                        let m = now.getMonth() //0~11
+                        let d = now.getDate()
+                        let h = now.getHours()
+                        let mi = now.getMinutes()
+                        let s = now.getSeconds()
+                        resultObj.innerHTML = y + "/" + m + "/" + d + " " +h+":" +mi+":" +s
+                    } , 1000)
+                })
+                //----class속성값이 timeout인 button객체에서 click이벤트가 발생했을 때 할 일 end---
+
+                let windowID;
+                //----class속성값이 interval인 button객체에서 click이벤트가 발생했을 때 할 일 start---
+                document.querySelector('button.interval').addEventListener('click',()=>{
+                    windowID = window.setInterval(()=>{
+                        const resultObj = document.querySelector('div.result')
+                        let now = new Date()
+                        let y = now.getFullYear()
+                        let m = now.getMonth() //0~11
+                        let d = now.getDate()
+                        let h = now.getHours()
+                        let mi = now.getMinutes()
+                        let s = now.getSeconds()
+                        resultObj.innerHTML = y + "/" + m + "/" + d + " " +h+":" +mi+":" +s
+                    } , 1000)
+                })
+                //----class속성값이 interval인 button객체에서 click이벤트가 발생했을 때 할 일 end---
+
+                //----class속성값이 clear인 button객체에서 click이벤트가 발생했을 때 할 일 start---
+                document.querySelector('button.clear').addEventListener('click', ()=>{
+                    window.clearInterval(windowID)
+                })
+                //----class속성값이 clear인 button객체에서 click이벤트가 발생했을 때 할 일 end---
+            })
+        </script>
+    </head>
+    <body>
+        <div class="result">
+        </div>
+        <button class="open">새창띄우기</button>
+        <button class="timeout">타이머</button>
+        <button class="interval">1초마다</button>
+        <button class="clear">1초마다 한 일 중지</button>
+    </body>
+</html>

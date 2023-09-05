@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.addEventListener('load', function(){
+                //DOM트리에서 div객체 찾기
+                const divObj = document.querySelector("div")
+                //DOM트리에서 a객체 찾기
+                const aObj = document.querySelector("div>a") //a객체가 하나면 a만 써도 된다
+
+                //----div객체에서 click이벤트가 발생했을 때 할 일 start---
+                divObj.addEventListener('click',function(e){
+                    //divObj.style.backgroundColor = 'gray'
+                    this.style.backgroundColor = 'gray' //click 이벤트가 발생된 객체를 찾으려면 this
+                    console.log(e.target)
+                    //e.target.style.backgroundColor = 'gray' //정말 이벤트가 발생된 곳을 찾고 싶으면 e.target
+                })
+                //----div객체에서 click이벤트가 발생했을 때 할 일 end---
+
+                //----a객체에서 click이벤트가 발생했을 때 할 일 start---
+                /*
+                aObj.addEventListener('click',function(e){
+                    //aObj.style.backgroundColor = 'yellow'
+                    //this.style.backgroundColor = 'yellow'
+                    console.log(e.target)
+                    e.target.style.backgroundColor = 'yellow'
+                    e.preventDefault() //기본이벤트 처리를 막는다
+                    //e.stopPropagation() //이벤트 전파를 중지한다
+                })
+                */
+                aObj.addEventListener('click', (e)=>{
+                    //e.target.style.backgroundColor='yellow'
+                    console.log(this) //window객체
+                    //this.style.backgroundColor='yellow'
+                    e.preventDefault()
+                })
+
+                //----a객체에서 click이벤트가 발생했을 때 할 일 end---
+            })
+        </script>
+    </head>
+    <body>
+        <div style="width:300px; height:300px; padding:20px;">
+            <a href="http://google.com">구글</a>
+        </div>
+    </body>
+</html>

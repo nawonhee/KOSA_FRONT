@@ -8,7 +8,7 @@
         </style>
         <script>
             //1.
-            window.addEventListener('load' , function(){
+            window.addEventListener('load' , function() {
                //document.getElementById()
                 //querySelector : 굳이 아이디속성 아니더라도 선택자를 이용해서 객체를 쉽게 찾아낼 수 있다
                 const inputObj = document.querySelector('input[type=text]')
@@ -16,17 +16,19 @@
 
                 const buttons = document.querySelectorAll('div.click>button')
                 //console.log(buttons) //NodeList(13)
-                // for(let i=0;i<buttons.length;i++){
-                //     const btObj = buttons[i]
+
+                for(let i=0;i<buttons.length;i++){
+                    const btObj = buttons[i]
                 //     //console.log(bt.innerHTML)
 
                 //     //--button객체에서 클릭이벤트가 발생했을 때 할 일 start --
                 //     //dom트리의 button객체에서 클릭이벤트가 발생했을 때 할 일을 등록한다
-                //     btObj.addEventListener('click',function(){
-                //         alert(btObj.innerHTML)
-                //     })
+                    btObj.addEventListener('click',function(){
+                        alert(btObj.innerHTML)
+                    })
                 //     //---button객체에서 클릭이벤트가 발생했을 때 할 일 end--
-                // }
+                }
+                
                 //buttons.forEach(btObj, index)
 
                 // buttons.forEach(function(btObj,i){
@@ -65,6 +67,7 @@
                 //DOM트리에서 class속성값이 category2인 select객체찾기
                 const selectObj2 = document.querySelector("div.select>select.category2")
                 //--select객체에서 체인지이벤트가 발생했을 때 할 일 START--
+                /*
                 selectObj.addEventListener('change', function(){
                     console.log('change', selectObj.value)
                     switch(selectObj.value){
@@ -85,6 +88,55 @@
                             break
                         default:
                             selectObj2.innerHTML = ''
+                            selectObj2.style.display = 'none'
+                            break
+                    }
+                })*/
+
+                selectObj.addEventListener('change', ()=>{
+                    selectObj2.replaceChildren() //자식요소들을 매개변수로 변경, 비워놓으면 비워짐
+                    let option, text
+                    switch(selectObj.value){
+                        case 'sedan':
+                            option = document.createElement('option')
+                            text = document.createTextNode('뉴아반테')
+                            option.appendChild(text)
+                            selectObj2.appendChild(option)
+
+                            option = document.createElement('option')
+                            text = document.createTextNode('그랜져')
+                            option.appendChild(text)
+                            selectObj2.appendChild(option)
+
+                            selectObj2.style.display='inline-block'
+                            break
+                        case 'suv' :
+                            option = document.createElement('option')
+                            text = document.createTextNode('산타페')
+                            option.appendChild(text)
+                            selectObj2.appendChild(option)
+
+                            option = document.createElement('option')
+                            text = document.createTextNode('투산')
+                            option.appendChild(text)
+                            selectObj2.appendChild(option)
+
+                            option = document.createElement('option')
+                            text = document.createTextNode('펠리세이드')
+                            option.appendChild(text)
+                            selectObj2.appendChild(option)
+
+                            selectObj2.style.display='inline-block'
+                            break
+                        case 'truck' :
+                            option = document.createElement('option')
+                            text = document.createTextNode('마이티')
+                            option.appendChild(text)
+                            selectObj2.append(option)
+
+                            selectObj2.style.display='inline-block'
+                            break
+                        default:
                             selectObj2.style.display = 'none'
                             break
                     }

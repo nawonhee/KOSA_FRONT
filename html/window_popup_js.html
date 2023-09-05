@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>window_popup_js.html</title>
+        <style>
+            div.list>dis:hover{
+                background-color: aquamarine;
+            }
+        </style>
+        <script>
+            window.addEventListener('load', ()=>{
+                const divArr = document.querySelectorAll('div.list>div')
+                divArr.forEach((divObj,index)=>{
+                    //----div객체 클릭되었을 때 할 일 start ---
+                    divObj.addEventListener('click',(e)=>{
+                        const divObj1 = e.target.parentNode
+                        const zipcodeObj = e.target.firstChild()
+                        const doroObj = e.target.lastChild()
+                        //console.log(zipcodeObj)
+                        //console.log(doroObj)
+                        //현재창 닫기
+
+                        const mainWindow = self.opener //부모창
+                        const resultObj = mainWindow.document.querySelector('div.result')
+                        resultObj.innerHTML = zipcodeObj.innerHTML + ':' + doroObj.innerHTML
+                        self.close()
+                    })
+                    //----div.list>div객체 클릭되었을 때 할 일 end ---
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <h1>우편번호검색(도로명주소검색)</h1>
+        <input type="text" placeholder="도로명주소를 입력하세요">
+        <button>우편번호검색</button>
+        <div class="list">
+            <div><span class="zipcode">25347</span><span class="doro">강원특별자치도 평창군 대관령면 올림픽로 6-5</span></div>
+            <div><span class="zipcode">25347</span><span class="doro">강원특별자치도 평창군 대관령면 올림픽로 8</span></div>
+            <div><span class="zipcode">25347</span><span class="doro">강원특별자치도 평창군 대관령면 올림픽로 24</span></div>
+        </div>
+        
+    </body>
+</html>

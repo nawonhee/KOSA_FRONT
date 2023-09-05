@@ -5,25 +5,65 @@
             div{
                 padding:10px;
             }
-            input.btn{
+            form>div.sign{
                 visibility: hidden;
             }
         </style>
+        <script>
+            window.addEventListener('load',function(){
+                //DOM트리에서 아이디 입력란 객체 찾기
+                const idObj = document.querySelector('form>div.id>label>input[type=text]')
+                //document.getElementById('id이름')
+                //document.querySelector('#id이름')
+                //DOM트리에서 가입하기 버튼 객체 찾기
+                const SignupObj = document.querySelector('form>div.sign>button[type=submit]')
+
+                //----id 입력란 객체가 focus이벤트가 발생했을 때 할 일 start---
+                idObj.addEventListener('focus',function(){
+                    SignupObj.style.visibility = 'hidden'
+                })
+                //----id 입력란 객체가 focus이벤트가 발생했을 때 할 일 end---
+
+                const DupchkObj = document.querySelector('form>div.id>button[type=button]')
+                
+                DupchkObj.addEventListener('click', function(){
+                    if('admin' == idObj.value){
+                        alert('이미 사용중인 아이디입니다')
+                    }
+                    else{
+                        alert('사용가능한 아이디입니다')
+                        SignupObj.style.visibility = 'visible'
+                    }
+                })
+
+                const formObj = document.querySelector('form')
+
+                formObj.addEventListener('submit', (e)=>{
+                    const pwd = document.querySelector('form>div.pwd>label>input[name=pwd]')
+                    const pwd2 = document.querySelector('form>div.pwd2>label>input[type=text]')
+                    if(pwd.value != pwd2.value){
+                        alert('비밀번호를 다시 입력하세요')
+                        pwd.focus()
+                        e.preventDefault()
+                    }
+                })
+            })
+        </script>
     </head>
     <body>
         <form method="post" action="http://localhost:8888/back/signup">
-            <div>
+            <div class="id">
                 <label>아이디 : <input type="text"
                                        required placeholder="아이디를 입력하세요"
                                        name="id"></label>
-                <input type="button" value="중복확인">
+                <button type="button">중복확인</button>
             </div>
-            <div>
+            <div class="pwd">
                 <label>비밀번호 : <input type="text" 
                                         required placeholder="비밀번호를 입력하세요"
                                         name="pwd"></label>
             </div>
-            <div>
+            <div class="pwd2">
                 <label>비밀번호 1 : <input type="text"
                                            required placeholder="비밀번호를 재입력하세요"></label>
             </div>
@@ -32,8 +72,8 @@
                                      required placeholder="이름을 입력하세요"
                                      name="name"></label>
             </div>
-            <div>
-                <input type="submit" value="가입하기" class="btn">
+            <div class="sign">
+                <button type="submit">가입하기</button>
             </div>
         </form>
     </body>
