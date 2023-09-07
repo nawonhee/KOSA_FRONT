@@ -49,72 +49,65 @@
                 
             }
         </style>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script>
-            window.addEventListener('load', ()=>{
-                function ajaxHandler(method, url, target){
-                    const xhttp = new XMLHttpRequest()
-                    xhttp.addEventListener('readystatechange', function(){
-                        if(this.readyState = 4){
-                            if(this.status==200){
-                                target.innerHTML = this.responseText
-                            }else if(this.status==404){
-                                alert('자원이 없습니다')
-                            }else if(this.status==500){
-                                alert('서버 실행 시 오류가 발생했습니다')
-                            }else{
-                                alert(this.responseText)
-                            }
-                        }
-                    })
-                    xhttp.open(method, url)
-                    xhttp.send()
-                }
+            
+            function ajaxHandler(method, u, target){
+                console.log(u)
+                
+                $.ajax({
+                    url: u,
+                    method: method,
+                    success: (responseText)=>{
+                        target.html(responseText)
+                    },
+                    error: ()=>{
+                        alert('응답실패')
+                    }
+                })
+            }
+
+
+            //$(document).ready()
+            $(() => {
                 //DOM트리에서 section 객체 찾기
                 const sectionObj = document.querySelector('section')
+                const $sectionObj = $('section')
+
+                console.log("---자바스크립트 객체---")
+                console.log(sectionObj)
+
+                console.log("---jQuery 객체---")
+                console.log($sectionObj)
+                console.log(sectionObj===$sectionObj)
+                console.log(sectionObj===$sectionObj.get(0))
+
                 //DOM트리에서 nav>ul>li>a객체들 찾기
                 const menus = document.querySelectorAll('nav>ul>li>a')
-                menus.forEach((menu, i)=>{
-                    //----메뉴객체에서 클릭이벤트가 발생했을 때 할 일 ---
-                    menu.addEventListener('click', (e)=>{
-                        //menu
-                        switch(e.target.className){
-                            case 'login':
-                                //location.href = 'http://www.naver.com'
-                                //const xhttp = new XMLHttpRequest()
-                                // xhttp.addEventListener('load', function(){
-                                //     sectionObj.innerHTML = this.responseText
-                                // })
-                                // xhttp.addEventListener('readystatechange',function(){
-                                //     //alert(this.readState+":"+this.status)
-                                //     if(this.readyState=4){
-                                //         if(this.status==200){
-                                //             sectionObj.innerHTML = this.responseText
-                                //         }else if(this.status==404){
-                                //             alert('자원이 없습니다')
-                                //         }else if(this.status==500){
-                                //             alert('서버 실행 시 오류가 발생했습니다')
-                                //         }else{
-                                //             alert(this.responseText)
-                                //         }
-                                //     }
-                                // })
-                                //xhttp.open('GET', './login.html')
-                                //xhttp.send()
-                                ajaxHandler('GET','./login.html',sectionObj)
-                                break
-                            case 'signup':
-                                ajaxHandler('GET','./signup.html',sectionObj)
-                                break
-                            case 'logout':break
-                            case 'productlist':
-                                ajaxHandler('GET','./productlist.html',sectionObj)
-                                break
-                            case 'cartlist':break
-                            case 'orderlist':break
-                        }
-                        e.preventDefault()
-                    })
-                    //----메뉴객체에서 클릭이벤트가 발생했을 때 할일 end ---
+                const $menus = $('nav>ul>li>a')
+
+                
+                $menus.click((e)=>{
+                    //alert('메뉴클릭됨')
+                    console.log(e.target.className)
+                    //menu
+                    switch(e.target.className){
+                        case 'login':
+                            ajaxHandler('GET', "./login.html", $sectionObj)
+                            break
+                        case 'signup':
+                            ajaxHandler('GET','./signup.html', $sectionObj)
+                            break
+                        case 'logout':break
+                        case 'productlist':
+                            ajaxHandler('GET','./productlist.html', $sectionObj)
+                            break
+                        case 'cartlist':break
+                        case 'orderlist':break
+
+                    }
+                    e.preventDefault()
                 })
             })
         </script>
