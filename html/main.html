@@ -56,16 +56,23 @@
             function ajaxHandler(method, u, target){
                 console.log(u)
                 
-                $.ajax({
-                    url: u,
-                    method: method,
-                    success: (responseText)=>{
-                        target.html(responseText)
-                    },
-                    error: ()=>{
-                        alert('응답실패')
-                    }
-                })
+                // $.ajax({
+                //     url: u,
+                //     method: method,
+                //     success: (responseText)=>{
+                //         target.html(responseText)
+                //     },
+                //     error: ()=>{
+                //         alert('응답실패')
+                //     }
+                // })
+                if(method == 'GET'){
+                    target.load(u, function( response, status, xhr){
+                        if(status=="error"){
+                            alert(xhr.status+xhr.statusText)
+                        }
+                    })
+                }
             }
 
 
