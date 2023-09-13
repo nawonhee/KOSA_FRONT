@@ -27,6 +27,85 @@
                 background: yellow;
             }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script>
+            $(()=>{
+                function ajaxHandler(cp){
+                    $.ajax({
+                        url: 'http://localhost:8888/back/productlistjson',
+                        method : 'get',
+                        data : `currentPage=${cp}`,
+                        success: (responseJSONObj)=>{
+                            const totalCnt = responseJSONObj.totalCnt
+                            const list = responseJSONObj.list
+                            //원본 product객체 찾기
+                            const $originProduct = $('div.productlist>div.product').first()
+                            //$originProduct.parent().children().not($originProduct)
+                            //productlist영역 초기화
+                            $originProduct.siblings().remove() 
+                            $originProduct.show()
+                            
+                            $(list).each((index, p)=>{
+                                //복제본 product객체 생성
+                                const $copyProduct = $originProduct.clone()
+                                const prodNo = p.prodNo
+                                const prodName = p.prodName
+                                $copyProduct.find("ul>li>img").attr('src','../images/'+prodNo+'.png').attr("alt", prodName)
+                                $copyProduct.find("ul>li>span").html(prodName)
+
+                                //복제본객체를 .productlist객체의 자식으로 추가
+                                $('div.productlist').append($copyProduct)
+                            })
+                            $originProduct.hide()
+
+                            //페이지그룹
+                            const $divPageGroup = $('div.pagegroup')
+                            //페이지그룹 영역 초기화
+                            $divPageGroup.empty() 
+
+                            const startPage = responseJSONObj.startPage //시작페이지
+                            const endPage = responseJSONObj.endPage //끝페이지
+
+                            if(startPage>1){
+                                let page = `[<span class="pg${startPage-1}">PREV</span>]&nbsp;&nbsp;&nbsp;`
+                                $divPageGroup.html($divPageGroup.html()+page)
+                            }
+                            for(let i = startPage; i<=endPage; i++){
+                                let page=`[<span class="pg${i}">${i}</span>]&nbsp;&nbsp;&nbsp;`
+                                $divPageGroup.html($divPageGroup.html()+page)
+                            }
+                            if(endPage!=responseJSONObj.totalPage){
+                                let page=`[<span class="pg${endPage+1}">NEXT</span>]`
+                                $divPageGroup.html($divPageGroup.html()+page)
+                            }
+                        },
+                        error: ()=>{
+
+                        }
+                    })
+                }
+                
+                ajaxHandler(1)
+                // $('div.productlist>div.pagegroup>span').click(()=>{
+                //     alert("클릭됨")
+                // })  ---> ajax가 나중에 호출될 수 있기 때문에
+                $('div.pagegroup').on('click','span',(e)=>{ // ajax호출하지 않고도 존재하는 객체를 가지고 해야 한다. 그럴 때 사용하는 것이 on이다. 나중에 추가될 span태그를 써주면 된다. (미리 할 일 등록)
+                    const pg = $(e.target).attr('class')
+                    const currentPage = pg.substr(2)
+                    ajaxHandler(currentPage)
+                }) 
+
+                $('div.productlist').on('click','div.product',(e)=>{
+                    //alert('클릭되었습니다')
+                    //alert($(e.target).find('img').attr('src').lastIndexOf('.'))
+                    const src = $(e.target).attr("src")
+ 
+                    const prodNo = src.substring(src.lastIndexOf('/')+1, src.lastIndexOf('.'))
+                    //alert(prodNo)
+                    location.href = `./product.html?prodno=${prodNo}`
+                })
+            })
+        </script>
     </head>
     <body>
 
@@ -34,28 +113,14 @@
             <h3>상품목록</h3>
             <div class="product">
                 <ul>
-                    <li><img src="../images/C0001.png" alt="아메리카노"></li>
-                    <li><span>아메리카노</span></li>
+                    <li><img src="" alt=""></li>
+                    <li><span>상품이름</span></li>
                 </ul>
             </div>
-            <div class="product">
-                <ul>
-                    <li><img src="../images/C0002.png" alt="아이스아메리카노"></li>
-                    <li><span>아이스아메리카노</span></li>
-                </ul>
-            </div>
-            <div class="product">
-                <ul>
-                    <li><img src="../images/C0005.png" alt="카푸치노"></li>
-                    <li><span>카푸치노</span></li>
-                </ul>
-            </div>
-            <div class="product">
-                <ul>
-                    <li><img src="../images/F0001.png"></li>
-                    <li><span>바나나</span></li>
-                </ul>
-            </div>
+
+        </div>
+        <div class="pagegroup">
+
         </div>
     </body>
 </html>

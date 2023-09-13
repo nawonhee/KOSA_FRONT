@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $(() => {
+            console.log(location.search)
+            const queryStr = location.search.substr(1)
+            $.ajax({
+                url: 'http://localhost:8888/back/productjson',
+                method : 'get',
+                data : queryStr,
+                success: (responseJSONObj)=>{
+                    if(responseJSONObj.msg != undefined){ //상품검색 실패인 경우
+                        alert(responseJSONObj.msg)
+                    }else{
+                        //상품검색 성공인 경우
+                        $('div.product>img').attr('src',`../images/${responseJSONObj.prodNo}.png`)
+                        $('div.product>div>ul>li>span.prodname').html(responseJSONObj.prodName)
+                        $('div.product>div>ul>li>span.prodno').html(responseJSONObj.prodNo)
+                        $('div.product>div>ul>li>span.prodprice').html(responseJSONObj.prodPrice)
+                    }
+                },
+                error: (jqxhr)=>{
+                    console.log(jqxhr.state()) //rejected
+                    console.log(jqxhr.state) //500
+                }
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+    <div class="product">
+        <img src="../images/elemental.png">
+        <div>
+            <ul>
+                <li>상품이름:<span class="prodname"></span></li>
+                <li>상품번호:<span class="prodno"></span></li>
+                <li>상품가격:<span class="prodprice"></span></li>
+                <li>수량:<input type="number" class="quantity" value="1" max="10" min="1"></li>
+                <li><button>장바구니넣기</button></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
