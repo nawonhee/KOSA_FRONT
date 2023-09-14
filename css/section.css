@@ -1,0 +1,7 @@
+
+section{
+    text-align: center;
+}
+section>div.product>div>ul{
+    list-style-type: none;
+}

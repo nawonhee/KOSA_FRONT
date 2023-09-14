@@ -3,9 +3,12 @@
     <head>
         <title>Kosabucks Korea</title>
         <style>
+            /*
             *{
                 box-sizing: border-box;
             }
+            */
+            /*
             header{
                 background-color: #FAECC5; 
                 padding:20px;
@@ -34,11 +37,13 @@
             } 
             nav>ul>li>a{
                 text-decoration: underline;
-            }
+            }*/
+            /*
             section{
                 height:500px;
                 text-align: center;
-            }
+            }*/
+            /*
             footer{
                 height:100px;
                 padding:20px;
@@ -47,78 +52,14 @@
                 background-color: #000000;
                 color: white;
                 
-            }
+            }*/
         </style>
+        <link rel="stylesheet" href="../css/header.css"> 
+        <link rel="stylesheet" href="../css/section.css"> 
+        <link rel="stylesheet" href="../css/footer.css"> <!--아래쪽이 우선순위 높음-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script>
-            
-            function ajaxHandler(method, u, target){
-                console.log(u)
-                
-                // $.ajax({
-                //     url: u,
-                //     method: method,
-                //     success: (responseText)=>{
-                //         target.html(responseText)
-                //     },
-                //     error: ()=>{
-                //         alert('응답실패')
-                //     }
-                // })
-                if(method == 'GET'){
-                    target.load(u, function( response, status, xhr){
-                        if(status=="error"){
-                            alert(xhr.status+xhr.statusText)
-                        }
-                    })
-                }
-            }
-
-
-            //$(document).ready()
-            $(() => {
-                //DOM트리에서 section 객체 찾기
-                const sectionObj = document.querySelector('section')
-                const $sectionObj = $('section')
-
-                console.log("---자바스크립트 객체---")
-                console.log(sectionObj)
-
-                console.log("---jQuery 객체---")
-                console.log($sectionObj)
-                console.log(sectionObj===$sectionObj)
-                console.log(sectionObj===$sectionObj.get(0))
-
-                //DOM트리에서 nav>ul>li>a객체들 찾기
-                const menus = document.querySelectorAll('nav>ul>li>a')
-                const $menus = $('nav>ul>li>a')
-
-                
-                $menus.click((e)=>{
-                    //alert('메뉴클릭됨')
-                    console.log(e.target.className)
-                    //menu
-                    switch(e.target.className){
-                        case 'login':
-                            ajaxHandler('GET', "./login.html", $sectionObj)
-                            break
-                        case 'signup':
-                            ajaxHandler('GET','./signup.html', $sectionObj)
-                            break
-                        case 'logout':break
-                        case 'productlist':
-                            ajaxHandler('GET','./productlist.html', $sectionObj)
-                            //ajaxHandler('GET','http://localhost:8888/back/productlistjson', $sectionObj)
-                            break
-                        case 'cartlist':break
-                        case 'orderlist':break
-
-                    }
-                    e.preventDefault()
-                })
-            })
-        </script>
+        <script src="../js/header.js"></script>
     </head>
     <body>
         <header>
