@@ -11,6 +11,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="../js/header.js"></script>
+    <script src="../js/product.js"></script>
     <script>
         $(() => {
             console.log(location.search)
@@ -38,6 +39,28 @@
             $('header>img').click((e)=>{
                     location.href='./main.html'
                 })
+
+            //----장바구니넣기 버튼객체에서 클릭이벤트가 발생했을 때 할 일 START----
+            $('div.product>div>ul>li>button').click(()=>{
+                const prodno = $('div.product span.prodno').html()
+                const quantity = $('div.product input.quantity').val()
+                $.ajax({
+                    xhrFields: { //정보를 보낼 시 인증서를 보내겠다
+                        withCredentials: true
+                     },
+                    url: 'http://192.168.1.12:8888/back/addcart',//'http://localhost:8888/back/addcart',
+                    method : 'get',
+                    data : `prodNo=${prodno}&quantity=${quantity}`,
+                    success: ()=>{
+
+                    },
+                    error : (jqxhr)=>{
+                        alert(jqxhr.status)
+                    }   
+
+                })
+            })
+            //----장바구니넣기 버튼객체에서 클릭이벤트가 발생했을 때 할 일 END----
         })
     </script>
 
