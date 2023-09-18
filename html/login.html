@@ -6,41 +6,8 @@
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script>
-    
-    $(()=>{
-        const savedId = localStorage.getItem('savedId')
-        if(savedId != null){
-            $('div>label>input[name=id]').val(savedId)
-        }
-        $('form').submit((e)=>{
-            if($('div>input[type=checkbox]').prop('checked')){
-                localStorage.setItem('savedId',$('div>label>input[name=id]').val())
-            }else{
-                localStorage.removeItem('savedId')
-            }
-            
-            const idValue = $('div>label>input[name=id]').val()
-            const pwdValue = $('div>label>input[name=pwd]').val()
-            const data = `id=${idValue}&pwd=${pwdValue}`
+<script src="../js/login.js"></script>
 
-            $.ajax({
-                url: 'http://localhost:8888/back/login',
-                method: 'POST',
-                success: (responseText)=>{
-                    alert(responseText)
-                },
-                error:(jqXHR, textStatus)=>{
-                    alert(jqXHR.readyState+":"+jqXHR.status+":"+jqXHR.statusText)
-                    console.log(jqXHR)
-                }
-            })
-            e.preventDefault()
-
-        })
-    })
-
-</script>
 
 
 <!-- <form method="post"

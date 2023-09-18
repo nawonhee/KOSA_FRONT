@@ -24,6 +24,18 @@ function ajaxHandler(method, u, target) {
 
 //$(document).ready()
 $(() => {
+    const loginedId = localStorage.getItem("loginedId")
+    if(loginedId == null){ //로그인 안 된 경우
+        //로그인, 가입메뉴 보여주기 / 로그아웃메뉴 안 보여주기
+        $('nav>ul>li>a.login').parent().show()
+        $('nav>ul>li>a.signup').parent().show()
+        $('nav>ul>li>a.logout').parent().hide()
+    }else{ //로그인 된 경우
+        //로그아웃 메뉴 보여주기 / 로그인, 가입메뉴 안 보여주기
+        $('nav>ul>li>a.login').parent().hide()
+        $('nav>ul>li>a.signup').parent().hide()
+        $('nav>ul>li>a.logout').parent().show()
+    }
     //DOM트리에서 section 객체 찾기
     const sectionObj = document.querySelector('section')
     const $sectionObj = $('section')
@@ -52,12 +64,26 @@ $(() => {
             case 'signup':
                 ajaxHandler('GET', './signup.html', $sectionObj)
                 break
-            case 'logout': break
+            case 'logout': 
+                $.ajax({
+                    xhrFields:{
+                        withCredentials : true
+                    },
+                    url: 'http://192.168.1.12:8888/back/logout',
+                    method : 'get',
+                    success: ()=>{
+                        localStorage.removeItem('loginedId')
+                        location.href='./main.html'
+                    }
+                })
+                break
             case 'productlist':
                 ajaxHandler('GET', './productlist.html', $sectionObj)
                 //ajaxHandler('GET','http://localhost:8888/back/productlistjson', $sectionObj)
                 break
-            case 'cartlist': break
+            case 'cartlist': 
+                ajaxHandler('GET', './cartlist.html',$sectionObj)
+                break
             case 'orderlist': break
 
         }
