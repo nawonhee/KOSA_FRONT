@@ -1,0 +1,31 @@
+div.orderList>div.orderInfo{
+    width: 80%;
+    border-bottom : 1px solid;
+    /* border-collapse: collapse; */
+}
+div.orderNo, div.orderDt, div.lines, div.prodNo, div.prodName, div.prodPrice, div.orderQuantity{
+    display: inline-block;
+    vertical-align: middle;
+}
+div.orderNo, div.orderDt{
+    width: 10%;
+    word-wrap: break-word; /*자동줄바꿈*/
+}
+div.lines{
+    width: 70%;
+}
+div.line{
+    width:100%;
+}
+div.prodNo{
+    width:10%;
+}
+div.prodName{
+    width:40%;
+    text-align:center;
+    word-wrap: break-word; /*자동줄바꿈*/
+}
+div.prodPrice, div.orderQuantity{
+    width:20%;
+    text-align:right;
+}

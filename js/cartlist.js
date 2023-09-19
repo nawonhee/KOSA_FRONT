@@ -5,12 +5,12 @@ $(()=>{
         },
         url: 'http://192.168.1.12:8888/back/cartlist',
         method : 'get',
-        success:(resposeJSONObj)=>{
-            // const p = resposeJSONObj[0].product
-            // const q = resposeJSONObj[0].quantity
+        success:(responseJSONObj)=>{
+            // const p = responseJSONObj[0].product
+            // const q = responseJSONObj[0].quantity
             //console.log(p,q)
 
-            if(resposeJSONObj.msg != undefined){
+            if(responseJSONObj.msg != undefined){
                 alert('장바구니 없습니다')
                 return
             }
@@ -19,7 +19,7 @@ $(()=>{
             const $tbodyObj = $('div.cartlist>table>tbody')
             let totalPrice = 0;
 
-            resposeJSONObj.forEach(element=>{
+            responseJSONObj.forEach(element=>{
                 const $copyTrObj = $originTrObj.clone()
                 $copyTrObj.empty()
                 const p = element.product
