@@ -47,12 +47,15 @@
             }
             else{
                 //console.log($('form').serialize()) //serialize는 post방식의 요청일 때만 효과있음
+                const fd = new FormData(e.target)
                 $.ajax({
                     url: 'http://192.168.1.12:8888/back/signup',
                     method : 'post',
                     //data : `id=${$idObj.val()}&pwd=${$pwdArr.eq(0).val()}&name=${$nameObj.val()}`,
                     //data : {id: $idObj.val() , pwd:$pwdArr.eq(0).val() , name: $nameObj.val() },
-                    data : $('form').serialize(),
+                    contentType: false, //파일첨부용 프로퍼티
+                    processData : false, //파일첨부용 프로퍼티
+                    data : fd,//$('form').serialize(),
                     success : (responseJSONObj)=>{
                         if(responseJSONObj.status==1){
                             alert(responseJSONObj.msg)
@@ -69,5 +72,50 @@
             return false //e.preventDefault()+e.stopPrepagation() 효과
         })
 
+        //----파일업로드용 테스트 폼객체에서 submit이벤트 발생했을 때 할 일 START ----
+        const $uploadForm = $('form.form1')
+        $uploadForm.submit((e)=>{
+            const fd2 = new FormData(e.target)
+            fd2.forEach((value,key)=>{
+                console.log(key)
+                console.log(value)
+                console.log("-----------")
+            })
+            $.ajax({
+                url: 'http://192.168.1.12:8888/back/upload',
+                method: 'post',
+                contentType: false, //파일첨부용 프로퍼티
+                processData : false, //파일첨부용 프로퍼티
+                data : fd2, //"t=tValue&"
+                success : (responseJSONObj)=>{
+                    alert(responseJSONObj.msg)
+                    if(responseJSONObj.status==1){
+                        location.href='./main.html'
+                    }
+                },
+                error : ()=>{}
+            })
+            return false //기본이벤트 막고, 이벤트 전파도 막음
+        })
+        //----파일업로드용 테스트 폼객체에서 submit이벤트 발생했을 때 할 일 END ----
+
+
+        //----파일다운로드 테스트 버튼에서 클릭이벤트 발생했을때 할 일 sTART----
+    $('div.download>button').click(()=>{
+        const $img = $('div.download>img')
+        $.ajax({
+            xhrFields: {
+                responseType: "blob",
+            },
+            url: 'http://192.168.1.12:8888/back/download',
+            data: 'id=test',
+            success: (responseData)=>{
+                const url = URL.createObjectURL(responseData)
+                $img.attr('src', url)
+            }
+        })
+        
+    })
+    //----파일다운로드 테스트 버튼에서 클릭이벤트 발생했을때 할 일 END----
     
     })

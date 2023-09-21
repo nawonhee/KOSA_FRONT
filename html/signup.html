@@ -13,7 +13,7 @@
         <script src="../js/signup.js"></script>
     </head>
     <body>
-        <form class="signup" method="post" action="http://localhost:8888/back/signup"> <!--<form method="post" action="http://localhost:8888/back/signup">-->
+        <form class="signup" method="post" action="http://localhost:8888/back/signup" enctype="multipart/form-data"> <!--<form method="post" action="http://localhost:8888/back/signup">-->
             <div class="id">
                 <label>아이디 : <input type="text"
                                        required placeholder="아이디를 입력하세요"
@@ -34,15 +34,31 @@
                                      required placeholder="이름을 입력하세요"
                                      name="name"></label>
             </div>
+            <div>
+                <label>프로필 :<input type="file" name="f1" id="f1"></label>
+                <label>자기소개서:<input type="file" name="f2" id="f2"></label>
+            </div>
             <div class="sign">
                 <button type="submit">가입하기</button>
             </div>
         </form>
         <hr>
+        <!--
         <form method="post" enctype="multipart/form-data" action="http://192.168.1.12:8888/back/upload">
             <input type="file" multiple name="f1"><br>
             <input type="text" name="t" value="tValue"><br>
             <button type="submit">첨부</button>
         </form>
+        <hr>
+        <form class = "form1">
+            <input type="file" multiple name="f1"><br>
+            <input type="text" name="t" value="tValue"><br>
+            <button type="submit">첨부</button>
+        </form>
+    -->
+    <div class="download">
+        <img>
+        <button>파일다운로드</button>
+    </div>
     </body>
 </html>
