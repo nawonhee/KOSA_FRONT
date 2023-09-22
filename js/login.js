@@ -18,7 +18,7 @@ $(()=>{
             xhrFields:{
                 withCredentials : true
             },
-            url: 'http://192.168.1.12:8888/back/login',
+            url: 'http://192.168.1.12:8888/back2/login',
             method: 'POST',
             data : data,
             success: (responseJSONObj)=>{

@@ -11,7 +11,7 @@
 
         $btDupchkObj.click(() => {
             $.ajax({
-                url: 'http://192.168.1.12:8888/back/iddupchk',
+                url: 'http://192.168.1.12:8888/back2/iddupchk',
                 method : 'get',
                 data : `id=${$idObj.val()}`,
                 success : (responseJSONObj)=>{
@@ -49,7 +49,7 @@
                 //console.log($('form').serialize()) //serialize는 post방식의 요청일 때만 효과있음
                 const fd = new FormData(e.target)
                 $.ajax({
-                    url: 'http://192.168.1.12:8888/back/signup',
+                    url: 'http://192.168.1.12:8888/back2/signup',
                     method : 'post',
                     //data : `id=${$idObj.val()}&pwd=${$pwdArr.eq(0).val()}&name=${$nameObj.val()}`,
                     //data : {id: $idObj.val() , pwd:$pwdArr.eq(0).val() , name: $nameObj.val() },
@@ -82,7 +82,7 @@
                 console.log("-----------")
             })
             $.ajax({
-                url: 'http://192.168.1.12:8888/back/upload',
+                url: 'http://192.168.1.12:8888/back2/upload',
                 method: 'post',
                 contentType: false, //파일첨부용 프로퍼티
                 processData : false, //파일첨부용 프로퍼티
@@ -107,7 +107,7 @@
             xhrFields: {
                 responseType: "blob",
             },
-            url: 'http://192.168.1.12:8888/back/download',
+            url: 'http://192.168.1.12:8888/back2/download',
             data: 'id=test',
             success: (responseData)=>{
                 const url = URL.createObjectURL(responseData)
@@ -117,5 +117,13 @@
         
     })
     //----파일다운로드 테스트 버튼에서 클릭이벤트 발생했을때 할 일 END----
+
+    //----프로필 input객체에서 체인지이벤트 발생했을 때 할 일 START-----
+    $('form.signup>div>label>input[name=f1]').change((e)=>{
+        console.log(e.target.files[0])
+        const url = URL.createObjectURL(e.target.files[0])
+        $('form.signup>div>div>img.profile').attr('src',url)
+    })
+    //----프로필 input객체에서 체인지이벤트 발생했을 때 할 일 -----
     
     })

@@ -1,4 +1,5 @@
-
+const backURL = 'http://192.168.1.12:8888/back2222'
+const frontURL = 'http://192.168.1.12:5500/html'
 function ajaxHandler(method, u, target) {
     console.log(u)
 
@@ -25,15 +26,36 @@ function ajaxHandler(method, u, target) {
 //$(document).ready()
 $(() => {
     const loginedId = localStorage.getItem("loginedId")
+    const $img = $('nav>ul>li>img.profile')
+    $img.parent().hide()
     if(loginedId == null){ //로그인 안 된 경우
-        //로그인, 가입메뉴 보여주기 / 로그아웃메뉴 안 보여주기
+        //로그인, 가입메뉴 보여주기 / 자소서, 프로필이미지, 로그아웃메뉴 안 보여주기
         $('nav>ul>li>a.login').parent().show()
         $('nav>ul>li>a.signup').parent().show()
+        $('nav>ul>li>a.intro').parent().hide()
         $('nav>ul>li>a.logout').parent().hide()
     }else{ //로그인 된 경우
+        $.ajax({
+            xhrFields: {
+                responseType: "blob",
+            },
+            url: 'http://192.168.1.12:8888/back2/download',
+            data: 'id='+loginedId+"&opt=profile",
+            success: (responseData)=>{
+                if(responseData.size > 0){
+                    const url = URL.createObjectURL(responseData)
+                    $img.attr('src', url)
+                    $img.parent().show()
+                }
+            },
+            error: (jqxhr)=>{
+                
+            }
+        })
         //로그아웃 메뉴 보여주기 / 로그인, 가입메뉴 안 보여주기
         $('nav>ul>li>a.login').parent().hide()
         $('nav>ul>li>a.signup').parent().hide()
+        $('nav>ul>li>a.intro').parent().show()
         $('nav>ul>li>a.logout').parent().show()
     }
     //DOM트리에서 section 객체 찾기
@@ -69,7 +91,7 @@ $(() => {
                     xhrFields:{
                         withCredentials : true
                     },
-                    url: 'http://192.168.1.12:8888/back/logout',
+                    url: 'http://192.168.1.12:8888/back2/logout',
                     method : 'get',
                     success: ()=>{
                         localStorage.removeItem('loginedId')
@@ -86,6 +108,9 @@ $(() => {
                 break
             case 'orderlist': 
                 ajaxHandler('GET', './orderlist.html',$sectionObj)
+                break
+            case 'intro':
+                location.href='http://192.168.1.12:8888/back2/download?id='+ loginedId + '&opt=intro'
                 break
 
         }
