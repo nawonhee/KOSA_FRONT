@@ -11,7 +11,7 @@
 
         $btDupchkObj.click(() => {
             $.ajax({
-                url: 'http://192.168.1.12:8888/back2/iddupchk',
+                url: 'http://192.168.1.12:8888/backspring/iddupchk',
                 method : 'get',
                 data : `id=${$idObj.val()}`,
                 success : (responseJSONObj)=>{
@@ -49,7 +49,7 @@
                 //console.log($('form').serialize()) //serialize는 post방식의 요청일 때만 효과있음
                 const fd = new FormData(e.target)
                 $.ajax({
-                    url: 'http://192.168.1.12:8888/back2/signup',
+                    url: 'http://192.168.1.12:8888/backspring/signup',
                     method : 'post',
                     //data : `id=${$idObj.val()}&pwd=${$pwdArr.eq(0).val()}&name=${$nameObj.val()}`,
                     //data : {id: $idObj.val() , pwd:$pwdArr.eq(0).val() , name: $nameObj.val() },
@@ -82,7 +82,7 @@
                 console.log("-----------")
             })
             $.ajax({
-                url: 'http://192.168.1.12:8888/back2/upload',
+                url: 'http://192.168.1.12:8888/backspring/upload',
                 method: 'post',
                 contentType: false, //파일첨부용 프로퍼티
                 processData : false, //파일첨부용 프로퍼티
@@ -107,7 +107,7 @@
             xhrFields: {
                 responseType: "blob",
             },
-            url: 'http://192.168.1.12:8888/back2/download',
+            url: 'http://192.168.1.12:8888/backspring/download',
             data: 'id=test',
             success: (responseData)=>{
                 const url = URL.createObjectURL(responseData)

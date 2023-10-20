@@ -1,4 +1,4 @@
-const backURL = 'http://192.168.1.12:8888/back2222'
+const backURL = 'http://192.168.1.12:8888/backspring'
 const frontURL = 'http://192.168.1.12:5500/html'
 function ajaxHandler(method, u, target) {
     console.log(u)
@@ -39,7 +39,7 @@ $(() => {
             xhrFields: {
                 responseType: "blob",
             },
-            url: 'http://192.168.1.12:8888/back2/download',
+            url: 'http://192.168.1.12:8888/backspring/download',
             data: 'id='+loginedId+"&opt=profile",
             success: (responseData)=>{
                 if(responseData.size > 0){
@@ -91,7 +91,7 @@ $(() => {
                     xhrFields:{
                         withCredentials : true
                     },
-                    url: 'http://192.168.1.12:8888/back2/logout',
+                    url: 'http://192.168.1.12:8888/backspring/logout',
                     method : 'get',
                     success: ()=>{
                         localStorage.removeItem('loginedId')
@@ -110,7 +110,7 @@ $(() => {
                 ajaxHandler('GET', './orderlist.html',$sectionObj)
                 break
             case 'intro':
-                location.href='http://192.168.1.12:8888/back2/download?id='+ loginedId + '&opt=intro'
+                location.href='http://192.168.1.12:8888/backspring/download?id='+ loginedId + '&opt=intro'
                 break
 
         }

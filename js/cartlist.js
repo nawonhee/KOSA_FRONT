@@ -3,7 +3,7 @@ $(()=>{
         xhrFields:{
             withCredentials: true
         },
-        url: 'http://192.168.1.12:8888/back2/cartlist',
+        url: 'http://192.168.1.12:8888/backspring/cartlist',
         method : 'get',
         success:(responseJSONObj)=>{
             // const p = responseJSONObj[0].product
@@ -57,7 +57,7 @@ $(()=>{
             xhrFields: {
                 withCredentials: true
             },
-            url: 'http://192.168.1.12:8888/back2/addorder',
+            url: 'http://192.168.1.12:8888/backspring/addorder',
             method : 'get',
             success: (responseJSONObj)=>{
                 if(responseJSONObj.status == 0){ //주문실패

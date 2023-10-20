@@ -20,7 +20,7 @@
                 width:80%;
                 text-align: center;
             }
-            .productlist>h3{
+            div.productlist>h3{
                 width:200px;
                 margin:10px auto;
                 text-align: right;
@@ -32,7 +32,7 @@
             $(()=>{
                 function ajaxHandler(cp){
                     $.ajax({
-                        url: 'http://localhost:8888/back2/productlistjson',
+                        url: 'http://localhost:8888/backspring/productlistjson',
                         method : 'get',
                         data : `currentPage=${cp}`,
                         success: (responseJSONObj)=>{
