@@ -17,7 +17,7 @@
             console.log(location.search)
             const queryStr = location.search.substr(1)
             $.ajax({
-                url: 'http://localhost:8888/backspring/productjson',
+                url: `${backURL}/productjson`,
                 method : 'get',
                 data : queryStr,
                 success: (responseJSONObj)=>{
@@ -48,7 +48,7 @@
                     xhrFields: { //정보를 보낼 시 인증서를 보내겠다
                         withCredentials: true
                      },
-                    url: 'http://192.168.1.12:8888/backspring/addcart',//'http://localhost:8888/back/addcart',
+                    url: `${backURL}/addcart`,//'http://localhost:8888/back/addcart',
                     method : 'get',
                     data : `prodNo=${prodno}&quantity=${quantity}`,
                     success: ()=>{

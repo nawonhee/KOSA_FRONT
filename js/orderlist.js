@@ -4,7 +4,7 @@ $(()=>{
         xhrFields: {
             withCredentials: true
         },
-        url: 'http://192.168.1.12:8888/backspring/orderlist',
+        url: `${backURL}/orderlist`,
         method: 'get',
         success: (responseJSONObj) => {
             if(responseJSONObj.status == 0){

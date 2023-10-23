@@ -1,29 +1,29 @@
-const backURL = 'http://192.168.1.12:8888/backspring'
+const backURL = 'http://192.168.1.12:8888/backspringconfiguration'
 const frontURL = 'http://192.168.1.12:5500/html'
 function ajaxHandler(method, u, target) {
     console.log(u)
-
+    
     // $.ajax({
-    //     url: u,
-    //     method: method,
-    //     success: (responseText)=>{
-    //         target.html(responseText)
-    //     },
-    //     error: ()=>{
-    //         alert('응답실패')
-    //     }
-    // })
-    if (method == 'GET') {
-        target.load(u, function (response, status, xhr) {
-            if (status == "error") {
-                alert(xhr.status + xhr.statusText)
+        //     url: u,
+        //     method: method,
+        //     success: (responseText)=>{
+            //         target.html(responseText)
+            //     },
+            //     error: ()=>{
+                //         alert('응답실패')
+                //     }
+                // })
+                if (method == 'GET') {
+                    target.load(u, function (response, status, xhr) {
+                        if (status == "error") {
+                            alert(xhr.status + xhr.statusText)
+                        }
+                    })
+                }
             }
-        })
-    }
-}
-
-
-//$(document).ready()
+            
+            
+            //$(document).ready()
 $(() => {
     const loginedId = localStorage.getItem("loginedId")
     const $img = $('nav>ul>li>img.profile')
@@ -39,7 +39,7 @@ $(() => {
             xhrFields: {
                 responseType: "blob",
             },
-            url: 'http://192.168.1.12:8888/backspring/download',
+            url: `${backURL}/download`,
             data: 'id='+loginedId+"&opt=profile",
             success: (responseData)=>{
                 if(responseData.size > 0){
@@ -91,7 +91,7 @@ $(() => {
                     xhrFields:{
                         withCredentials : true
                     },
-                    url: 'http://192.168.1.12:8888/backspring/logout',
+                    url: `${backURL}/logout`,
                     method : 'get',
                     success: ()=>{
                         localStorage.removeItem('loginedId')
@@ -110,7 +110,7 @@ $(() => {
                 ajaxHandler('GET', './orderlist.html',$sectionObj)
                 break
             case 'intro':
-                location.href='http://192.168.1.12:8888/backspring/download?id='+ loginedId + '&opt=intro'
+                location.href=`${backURL}/download?id=${loginedId}&opt=intro`
                 break
 
         }
