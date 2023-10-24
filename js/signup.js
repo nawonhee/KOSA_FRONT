@@ -14,15 +14,22 @@
                 url: backURL+'/iddupchk',
                 method : 'get',
                 data : `id=${$idObj.val()}`,
-                success : (responseJSONObj)=>{
-                    console.log(responseJSONObj.status)
-                    if(responseJSONObj.status == 1){
-                        console.log($btSignupObj)
-                        // $btSignupObj.show()
-                        $btSignupObj.parent().show()
-                    }else{
-                        alert('이미 사용중인 아이디입니다')
-                    }
+                // success : (responseJSONObj)=>{
+                //     console.log(responseJSONObj.status)
+                //     if(responseJSONObj.status == 1){
+                //         console.log($btSignupObj)
+                //         // $btSignupObj.show()
+                //         $btSignupObj.parent().show()
+                //     }else{
+                //         alert('이미 사용중인 아이디입니다')
+                //     }
+                success: ()=>{
+                    $btSignupObj.parent().show()
+                },
+                error: (jqxhr)=>{
+                    // alert(jqxhr.status)
+                    alert(jqxhr.responseText)
+                    $idObj.select()
                 }
             })
         })
@@ -65,7 +72,8 @@
                         }
                     },
                     error: (jqxhr)=>{
-                        alert(jqxhr.status)
+                        // alert(jqxhr.status)
+                        alert(jqxhr.responseText)
                     }
                 })
             }
